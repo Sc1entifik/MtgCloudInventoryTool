@@ -25,4 +25,12 @@ This tool will take a .csv list cointaining the set abbreviation and collector n
 - Checking card wanted lists online against your collection.
 
 ## Versions
-- 0.01 First commit. This was one of the first projects that I built before I knew how to use version control and was still learning the basics of OOP. Sorry for the hard to read code but I had to learn somehow. While the project works I didn't want to leave it in it's current condition. This will soon be fixed starting with tests and refactoring. I am also going to break up this code base some more making it easier to read. Please wait for a later version to use. I will have this unknotted soon.
+- 0.01 - First commit. This was one of the first projects that I built before I knew how to use version control and was still learning the basics of OOP. Sorry for the hard to read code but I had to learn somehow. While the project works I didn't want to leave it in it's current condition. This will soon be fixed starting with tests and refactoring. I am also going to break up this code base some more making it easier to read. Please wait for a later version to use. I will have this unknotted soon.
+
+- 0.03 - entry_forms_and_databases.py and test_entry_forms_and_databases.py written and passed. 
+
+
+
+## Coming Soon
+New class for looking up cards by collection number and writing inventory csv files and the tests for that class.
+UX probably text based. 
