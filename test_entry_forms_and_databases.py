@@ -4,6 +4,11 @@ import json
 
 from entry_forms_and_databases import EntryForms, ScryfallDatabase
 
+'''
+IMPORTANT:
+Run these tests BEFORE running test_inventory_csv_generator.py 
+'''
+
 @pytest.fixture
 def scryfall_database():
     database = ScryfallDatabase()
