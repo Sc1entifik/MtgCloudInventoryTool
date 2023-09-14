@@ -4,19 +4,13 @@
 This python based tool will allow you to quickly create and maintain a cloud based inventory of your MTG cards when used with a site like Card Sphere or Deckbox.
 
 ## How This Tool Works
-This tool will take a .csv list cointaining the set abbreviation and collector numbers that are on the bottom of every magic card then create a .csv file filling out all the details you need to upload those cards to your inventory on sties like Card Shpere or Deckbox. Using this tool uploading a large or even medium sized collection of cards down to all your commons takes minutes.
+This tool will use a .csv file containing the set abbreviation, foil status, and then  another .csv file containing collector numbers that are on the bottom of every magic card to create a .csv file filling out all the details you need to upload those cards to your inventory on sties like Card Shpere or Deckbox. Using this tool to upload a large or even medium sized collection of cards down to all your commons takes minutes.
 
 ## Instructions
-1) Make sure the scryfall_default-cards.json file is updated to the newest release so it contains all magic cards you would want to import by running the download_scryfall_database method in entry_forms_and_databases.py. This needs to be done every time WOTC releases a new set. This codebase should automate this process for you soon!
-2) Run the optimize_scryfall_database method in the same class to create an optimized version of scryfall_default-cards.json so that it only contains the information we need thus dramatically increasing performance of the app.
-3) Run the reset_input_forms method in entry_forms_and_databases.py to either create or overwrite old input forms in the entry forms folder.
-4) Separate all your cards by set and foil/nonfoil then place them in large piles. At this point do not bother sorting them by rarity, or even color.
-5) Go to the EntryForms folder then go to set_and_foil_status.csv. Enter the set abbreviation separated by a comma followed by either foil or non-foil.
-6) Go to collector_numbers.csv. Here you will enter the collector numbers that are on the bottom of each card. Separate each three digit collector number with a period. *example: 115.61.12.78.93* This makes it easy and fast to enter the numbers only using the number pad on the right side of the keyboard.
-7) Run the generate_upload_csv method in inventory_csv_generator.py. This will generate your inventory_upload.csv file. Open this file with a text editor and check it to make sure it looks correct. 
-8) Once you are satisfied with your file go to the upload section of your Card Sphere or Deckbox website and upload the .csv file using Card Sphere format if it allows you to specify that and it will add those cards to your online inventory!
-9) Put the now inventoried cards away any way you like.
-10) Repeat steps 3-10 for all other cards not yet inventoried.
+1) Run mtg_cloud_inventory_tool.py from the command line.
+2) Check out the instructions from the UX in there.
+3) Make sure to fill out collector_numbers.py in EntryForms folder separating the card numbers with periods like so 12.53.214.321 and not commas.
+4) After generating file upload it to your inventory service through their .csv file upload option.
 
 ## Common Use Cases
 - Mainining your inventory after a draft or sealed deck.
@@ -31,7 +25,9 @@ This tool will take a .csv list cointaining the set abbreviation and collector n
 
 - 0.5 - inventory_csv_generator.py and test_inventory_csv_generator.py written and passed. Old files removed from repository.
 
+- 1.0 - user_interface.py, test_user_interface.py, and mtg_cloud_inventory_tool.py have been created. The text based UX is here! This is nothing fancy but definitely sufficient for this use case.
+
 
 
 ## Coming Soon
-UX probably text based. 
+Improvements to text based UX such as ASCII art.

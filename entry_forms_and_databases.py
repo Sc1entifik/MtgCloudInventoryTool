@@ -5,8 +5,8 @@ import requests
 class EntryForms():
     set_and_foil_status_path = "EntryForms/set_and_foil_status.csv"
     collector_numbers_path = "EntryForms/collector_numbers.csv"
-    set_and_foil_instructions = "Replace me with a set abbreviation and foil or non-foil like this.\n     MMQ,non-foil "
-    collector_numbers_instructions = "Replace me with collector numbers from the bottom center of your cards separated by periods like this.\n   95.75.16.78.116"
+    set_and_foil_instructions = "Replace me with a set abbreviation and foil or non-foil like this.\nMMQ,non-foil "
+    collector_numbers_instructions = "Replace me with collector numbers from the bottom center of your cards separated by periods like this.\n95.75.16.78.116"
 
     def reset_entry_forms(self):
         with open(EntryForms.set_and_foil_status_path, "w") as set_and_foil:
