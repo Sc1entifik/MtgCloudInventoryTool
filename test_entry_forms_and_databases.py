@@ -26,7 +26,8 @@ def test_reset_entry_forms(entry_forms):
     
     with open(EntryForms.set_and_foil_status_path, 'r') as status_object:
         status = csv.reader(status_object)
-        status_instructions = next(status)[0]
+        #Lines need to be joined back togeither using the ",".join(next(status)) line because of the commas naturally occuring in the sentence and the file being a .csv with a comma delimiter
+        status_instructions = ",".join(next(status))
         new_line_index = EntryForms.set_and_foil_instructions.find('\n')
         assert status_instructions == EntryForms.set_and_foil_instructions[:new_line_index]
 

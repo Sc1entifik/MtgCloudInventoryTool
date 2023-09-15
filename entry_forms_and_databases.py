@@ -5,7 +5,7 @@ import requests
 class EntryForms():
     set_and_foil_status_path = "EntryForms/set_and_foil_status.csv"
     collector_numbers_path = "EntryForms/collector_numbers.csv"
-    set_and_foil_instructions = "Replace me with a set abbreviation and foil or non-foil like this.\nMMQ,non-foil "
+    set_and_foil_instructions = "Replace me with a set abbreviation, foil or non-foil, and inventory format like this.\nMMQ,non-foil,cardsphere   (As of now formats include cardsphere, and deckbox)"
     collector_numbers_instructions = "Replace me with collector numbers from the bottom center of your cards separated by periods like this.\n95.75.16.78.116"
 
     def reset_entry_forms(self):
