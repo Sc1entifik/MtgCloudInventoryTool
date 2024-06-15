@@ -19,7 +19,7 @@ class InventoryCsvGenerator():
             card_set, foil_status, inventory_format = next(set_and_foil)
             foil_status_conversion = 0 if foil_status == "non-foil" else 1
 
-        return (card_set, foil_status_conversion, inventory_format) 
+        return (card_set.strip(), foil_status_conversion, inventory_format.strip()) 
 
 
     def _collector_number_list(self):
