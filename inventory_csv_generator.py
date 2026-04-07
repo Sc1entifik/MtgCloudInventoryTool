@@ -26,7 +26,6 @@ class InventoryCsvGenerator():
         with open(EntryForms.collector_numbers_path) as collector_number_object:
             collector_number_generator = csv.reader(collector_number_object, delimiter = ".")
             collector_number_list = next(collector_number_generator)
-            
 
         return collector_number_list
 
