@@ -66,7 +66,7 @@ def _set_foil_status_and_format():
 '''
 Call this test using -s flag and make note of the set length. The function gets it's data from the same database that it is tested against using _scryfall_test_values().
 Making sure that the set length is correct by doing a simple Google search for how many cards is in the set is a good check that all the cards in the set are indeed in the database. The second assurance is making sure the card names listed in the shown list make sense.
-If both these things coorelate then the odds that the database is corrupt is slim. 
+If both these things correlate then the odds that the database is corrupt is slim. 
 '''
 def test_get_card_dictionary(inventory_csv_generator):
     scryfall_dict = inventory_csv_generator.get_card_dictionary()

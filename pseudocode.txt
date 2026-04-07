@@ -1,0 +1,9 @@
+Make Generate inventory output.csv write the file as the set_abbr.csv.
+1) Make the program look up the file and if it exists add to the file. 
+2) If the file doesn't exist create a new one.
+3) Write tests
+
+
+Create a set name to abbreviation list for the main menu.
+1) Create a dictionary of set names to their abbreviations.
+2) Print each value from the main menu.

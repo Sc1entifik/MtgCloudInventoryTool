@@ -3,3 +3,4 @@ scratch_pad.py
 scratch_pad_2.py
 venv
 scryfall_default-cards.json
+__pycache__
