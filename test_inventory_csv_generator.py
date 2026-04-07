@@ -101,11 +101,12 @@ def test_generate_upload_csv(inventory_csv_generator):
             set_abbr = set_list[i]
             card_list_length, unused_list, card_set = _scryfall_test_values(set_abbr)
             card_range = range(1, card_list_length)
+            inventory_file_path = InventoryCsvGenerator.inventory_output_path + f"{set_abbr}.csv"
             _write_mock_set_and_foil_status_form(set_abbr, "non-foil", inventory_format)
             _write_mock_collector_number_form(card_range)
             inventory_csv_generator.generate_upload_csv()
 
-            with open(InventoryCsvGenerator.inventory_output_path, "r") as inventory_object:
+            with open(inventory_file_path, "r") as inventory_object:
                 inventory_dict = csv.DictReader(inventory_object)
                 inventory_format = _set_foil_status_and_format()[2]
             

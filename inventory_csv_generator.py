@@ -4,7 +4,7 @@ import csv
 from entry_forms_and_databases import EntryForms, ScryfallDatabase
 
 class InventoryCsvGenerator():
-    inventory_output_path = "InventoryOutput/inventory_upload.csv"
+    inventory_output_path = "InventoryOutput/"
     supported_inventory_formats = ("cardsphere", "deckbox")
     inventory_headers = (("Count", "Name", "Expansion", "Foil", "Condition", "Language", "Status"), ("Count", "Tradelist Count", "Name", "Expansion", "Foil", "Condition", "Language", "Card Number"))
 
@@ -48,8 +48,9 @@ class InventoryCsvGenerator():
         card_set, foil_status, inventory_format = self._set_and_foil_status()
         collector_numbers = self._collector_number_list()
         headers_by_format = {key:value for key, value in zip(InventoryCsvGenerator.supported_inventory_formats, InventoryCsvGenerator.inventory_headers)}
+        full_output_path = InventoryCsvGenerator.inventory_output_path + f"{card_set}.csv"
 
-        with open(InventoryCsvGenerator.inventory_output_path, "w") as inventory_object:
+        with open(full_output_path, "w") as inventory_object:
             inventory_csv = csv.writer(inventory_object)
             inventory_csv.writerow(headers_by_format.get(inventory_format))
 
@@ -69,7 +70,7 @@ class InventoryCsvGenerator():
                     inventory_row = inventory_rows_by_format.get(inventory_format) 
                     inventory_csv.writerow(inventory_row)
         
-        print(f"{InventoryCsvGenerator.inventory_output_path} has been written!\nCheck for accuracy before uploading to your inventory.")
+        print(f"{full_output_path} has been written!\nCheck for accuracy before uploading to your inventory.")
 
 
 
