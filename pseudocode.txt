@@ -1,9 +1,5 @@
-Make Generate inventory output.csv write the file as the set_abbr.csv.
-1) Make the program look up the file and if it exists add to the file. 
-2) If the file doesn't exist create a new one.
-3) Write tests
-
-
-Create a set name to abbreviation list for the main menu.
-1) Create a dictionary of set names to their abbreviations.
-2) Print each value from the main menu.
+Change the program to use one entry form file per set instead of one entry form file and one set and foil status file.
+1) Investigate how the program gets the set, foil status, etc.
+2) Use the file name to get the set
+3) Move the rest of the set and foil status stuff to the first line of each file.
+4) Use the first line of the file to get the rest of the data and the second line to get the card info.

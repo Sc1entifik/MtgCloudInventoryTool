@@ -1,8 +1,8 @@
-import csv
 import json
 import requests
 
 class EntryForms():
+    entry_forms_directory = "EntryForms"
     set_and_foil_status_path = "EntryForms/set_and_foil_status.csv"
     collector_numbers_path = "EntryForms/collector_numbers.csv"
     set_and_foil_instructions = "Replace me with a set abbreviation, foil or non-foil, and inventory format like this.\nMMQ,non-foil,cardsphere   (As of now formats include cardsphere, and deckbox)"
