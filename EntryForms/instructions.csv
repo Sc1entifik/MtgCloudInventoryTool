@@ -1,0 +1,7 @@
+Create a file for each set you are bulk importing with te name being the set_abb.csv (example: mmq.csv).
+
+The first line of each file should have foil or non-foil, and the inventory format (As of now formats include cardsphere, and deckbox) example: non-foil,deckbox
+
+The second line of each file should be the collector numbers of each card separated by a decimal point. example: 95.75.16.78.116
+
+ Once you fill out a file for all sets you are bulk importing run the program and choose option 4 from the main menu. This will create a bulk output file for each entry form you filled out.
