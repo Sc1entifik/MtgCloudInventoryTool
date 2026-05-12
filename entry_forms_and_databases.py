@@ -1,5 +1,6 @@
 import json
 import requests
+from pathlib import Path
 
 class EntryForms():
     entry_forms_directory = "EntryForms"
@@ -10,6 +11,8 @@ class EntryForms():
         with open(EntryForms.entry_forms_instructions_path, "w") as set_and_foil:
             set_and_foil.write(EntryForms.entry_forms_instructions)
 
+    def entry_form_file_path_objects(self):
+        return Path(EntryForms.entry_forms_directory)
 
 class ScryfallDatabase():
     scryfall_bulk_data_url = "https://api.scryfall.com/bulk-data"
@@ -50,4 +53,3 @@ class ScryfallDatabase():
         with open(ScryfallDatabase().json_destination, "w") as scryfall_db:
             scryfall_db.write(json.dumps(optimized_list))
             print(f"{ScryfallDatabase.json_destination} has been optimized for maximum performance!")
-

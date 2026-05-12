@@ -11,20 +11,23 @@ class InventoryCsvGenerator():
     
     def __init__(self):
         self.card_dictionary = self.get_card_dictionary()
-    
 
-    def _set_and_foil_status(self):
-        with open(EntryForms.set_and_foil_status_path) as set_foil_status_object:
-            set_and_foil = csv.reader(set_foil_status_object)
-            card_set, foil_status, inventory_format = next(set_and_foil)
-            foil_status_conversion = 0 if foil_status == "non-foil" else 1
+
+    def _set_and_foil_status(self, file_path_object):
+        card_set = file_path_object.stem
+
+        with open(file_path_object) as set_foil_status_object:
+            set_and_foil = csv.reader(set_foil_status_object, delimiter=".")
+            foil_status, inventory_format = next(set_and_foil)
+            foil_status_conversion = 0 if foil_status == "non-foil" else 1 
 
         return (card_set.strip(), foil_status_conversion, inventory_format.strip()) 
 
 
-    def _collector_number_list(self):
-        with open(EntryForms.collector_numbers_path) as collector_number_object:
-            collector_number_generator = csv.reader(collector_number_object, delimiter = ".")
+    def _collector_number_list(self, file_path_object):
+        with open(file_path_object) as collector_number_object:
+            collector_number_generator = csv.reader(collector_number_object, delimiter=".")
+            next(collector_number_generator) # gets rid of first line of csv file to get to collector numbers
             collector_number_list = next(collector_number_generator)
 
         return collector_number_list
@@ -43,9 +46,9 @@ class InventoryCsvGenerator():
         return scryfall_dictionary
 
     
-    def generate_upload_csv(self):
-        card_set, foil_status, inventory_format = self._set_and_foil_status()
-        collector_numbers = self._collector_number_list()
+    def _generate_upload_csv(self, file_path_object):
+        card_set, foil_status, inventory_format = self._set_and_foil_status(file_path_object)
+        collector_numbers = self._collector_number_list(file_path_object)
         headers_by_format = {key:value for key, value in zip(InventoryCsvGenerator.supported_inventory_formats, InventoryCsvGenerator.inventory_headers)}
         full_output_path = InventoryCsvGenerator.inventory_output_path + f"{card_set}.csv"
 
@@ -72,5 +75,9 @@ class InventoryCsvGenerator():
         print(f"{full_output_path} has been written!\nCheck for accuracy before uploading to your inventory.")
 
 
+    def generate_upload_csv_files(self):
+        entry_forms = EntryForms()
+        entry_form_file_objects = entry_forms.entry_form_file_path_objects()
 
-
+        for file_object in entry_form_file_objects.glob("*.csv"):
+            self._generate_upload_csv(file_object)

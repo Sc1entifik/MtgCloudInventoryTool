@@ -23,7 +23,7 @@ class UserInterface:
 
     def _generate_inventory_csv(self):
         inventory_generator = InventoryCsvGenerator()
-        inventory_generator.generate_upload_csv()
+        inventory_generator.generate_upload_csv_files()
 
 
     def _create_expansion_names_tuple(self):
