@@ -3,14 +3,12 @@ import requests
 
 class EntryForms():
     entry_forms_directory = "EntryForms"
+    entry_forms_instructions_path = "EntryForms/instructions.csv"
     entry_forms_instructions = "Name each file the set_abb.csv example: mmq.csv.\nThe first line of each file should have foil or non-foil, and the inventory format (As of now formats include cardsphere, and deckbox) example: non-foil,deckbox\nThe second line of each file should be the collector numbers of each card separated by a decimal point. example: 95.75.16.78.116\n\n Once you fill out a file for all sets you are bulk importing run the program and choose option 4 from the main menu. This will create a bulk output file for each entry form you filled out."
 
-    def reset_entry_forms(self):
-        with open(EntryForms.set_and_foil_status_path, "w") as set_and_foil:
-            set_and_foil.write(EntryForms.set_and_foil_instructions)
-
-        with open(EntryForms.collector_numbers_path, "w") as collector_numbers:
-            collector_numbers.write(EntryForms.collector_numbers_instructions)
+    def create_entry_form_instructions(self):
+        with open(EntryForms.entry_forms_instructions_path, "w") as set_and_foil:
+            set_and_foil.write(EntryForms.entry_forms_instructions)
 
 
 class ScryfallDatabase():

@@ -11,9 +11,9 @@ class UserInterface:
         self.user_interface_menu = self._create_user_interface_menu()
 
     
-    def _reset_entry_forms(self):
+    def _create_entry_form_instructions(self):
         entry_forms = EntryForms()
-        entry_forms.reset_entry_forms()
+        entry_forms.create_entry_form_instructions()
 
 
     def _download_and_optimize_database(self):
@@ -46,7 +46,7 @@ class UserInterface:
     def _create_user_interface_menu(self):
         user_interface_menu = {
             1 : self._display_instructions,
-            2 : self._reset_entry_forms,
+            2 : self._create_entry_form_instructions,
             3 : self._download_and_optimize_database,
             4 : self._generate_inventory_csv,
             5 : self._set_abbr_finder,
