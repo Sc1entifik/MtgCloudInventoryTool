@@ -2,12 +2,10 @@ import json
 import csv
 
 from entry_forms_and_databases import EntryForms, ScryfallDatabase
+from inventory_formats_and_headers import InventoryFormatsAndHeaders
 
 class InventoryCsvGenerator():
     inventory_output_path = "InventoryOutput/"
-    supported_inventory_formats = ("cardsphere", "deckbox")
-    inventory_headers = (("Count", "Name", "Expansion", "Foil", "Condition", "Language", "Status"), ("Count", "Tradelist Count", "Name", "Expansion", "Foil", "Condition", "Language", "Card Number"))
-
     
     def __init__(self):
         self.card_dictionary = self.get_card_dictionary()
@@ -49,7 +47,8 @@ class InventoryCsvGenerator():
     def _generate_upload_csv(self, file_path_object):
         card_set, foil_status, inventory_format = self._set_and_foil_status(file_path_object)
         collector_numbers = self._collector_number_list(file_path_object)
-        headers_by_format = {key:value for key, value in zip(InventoryCsvGenerator.supported_inventory_formats, InventoryCsvGenerator.inventory_headers)}
+        formats_and_headers_object = InventoryFormatsAndHeaders()
+        headers_by_format = formats_and_headers_object.headers_by_format_dictionary() 
         full_output_path = InventoryCsvGenerator.inventory_output_path + f"{card_set}.csv"
 
         with open(full_output_path, "w") as inventory_object:
@@ -59,16 +58,12 @@ class InventoryCsvGenerator():
             for collector_number in collector_numbers:
                 target_card = self._target_card(collector_number, card_set)
 
-                def inventory_rows_by_format_dictionary():
-                    inventory_rows_in_format_order = ((1, filtered_name, target_card.get("set_name"), foil_status, "NM", "English", "Have"),(1, 1, filtered_name, target_card.get("set_name"), foil_status, "Near Mint", "English", collector_number))
-
-                    return {key:value for key, value in zip(InventoryCsvGenerator.supported_inventory_formats, inventory_rows_in_format_order)}
-
+                
                 if target_card:
                     filter_index = target_card.get("name").find("//")
                     #Name filtered for double sided card names since Card Sphere will reject a full double sided card name.
                     filtered_name = target_card.get("name") if filter_index == -1 else target_card.get("name")[:filter_index]
-                    inventory_rows_by_format = inventory_rows_by_format_dictionary() 
+                    inventory_rows_by_format = formats_and_headers_object.inventory_rows_by_format_dictionary(filtered_name, target_card, foil_status, collector_number) 
                     inventory_row = inventory_rows_by_format.get(inventory_format) 
                     inventory_csv.writerow(inventory_row)
         
