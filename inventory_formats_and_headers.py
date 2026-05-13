@@ -1,5 +1,5 @@
 class InventoryFormatsAndHeaders():
-    supported_inventory_formats = ("cardsphere", "deckbox", "cardsphere")
+    supported_inventory_formats = ("cardsphere", "deckbox", "cardnexus")
     inventory_headers = ( ("Count", "Name", "Expansion", "Foil", "Condition", "Language", "Status"), ("Count", "Tradelist Count", "Name", "Expansion", "Foil", "Condition", "Language", "Card Number"), ("Count", "Tradelist Count", "Name", "Expansion", "Foil", "Condition", "Language", "Card Number") )
 
 

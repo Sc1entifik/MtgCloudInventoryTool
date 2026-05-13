@@ -11,13 +11,21 @@ class InventoryCsvGenerator():
         self.card_dictionary = self.get_card_dictionary()
 
 
+    def _foil_status_conversion(self, foil_status, inventory_format):
+        if inventory_format != "cardnexus":
+            return 0 if foil_status == "non-foil" else 1
+
+        else:
+            return "Standard" if foil_status == "non-foil" else "Foil"
+
+
     def _set_and_foil_status(self, file_path_object):
         card_set = file_path_object.stem
 
         with open(file_path_object) as set_foil_status_object:
             set_and_foil = csv.reader(set_foil_status_object, delimiter=".")
             foil_status, inventory_format = next(set_and_foil)
-            foil_status_conversion = 0 if foil_status == "non-foil" else 1 
+            foil_status_conversion = self._foil_status_conversion(foil_status, inventory_format) 
 
         return (card_set.strip(), foil_status_conversion, inventory_format.strip()) 
 
@@ -75,4 +83,8 @@ class InventoryCsvGenerator():
         entry_form_file_objects = entry_forms.entry_form_file_path_objects()
 
         for file_object in entry_form_file_objects.glob("*.csv"):
+            print(f"PROCESSING: {file_object}")
             self._generate_upload_csv(file_object)
+            print()
+
+
