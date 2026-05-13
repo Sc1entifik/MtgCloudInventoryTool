@@ -26,6 +26,11 @@ class UserInterface:
         inventory_generator.generate_upload_csv_files()
 
 
+    def _concatenate_upload_csv_files(self):
+        inventory_generator = InventoryCsvGenerator()
+        inventory_generator.concatenate_upload_csv_files()
+
+
     def _create_expansion_names_tuple(self):
         with open(ScryfallDatabase.json_destination) as database_object:
             scryfall_dictionary = json.load(database_object)
@@ -49,18 +54,19 @@ class UserInterface:
             2 : self._create_entry_form_instructions,
             3 : self._download_and_optimize_database,
             4 : self._generate_inventory_csv,
-            5 : self._set_abbr_finder,
-            6 : None
+            5 : self._concatenate_upload_csv_files,
+            6 : self._set_abbr_finder,
+            7 : None
         }
 
         return user_interface_menu
 
 
     def generate_main_menu(self):
-        menu_input = input("\nMTG Cloud Inventory Tool Main Menu\nPlease choose one of the following numbered options.\n1) Detailed Instructions\n2) Create Entry Form Instructions\n3) Update And Optimize Card Database\n4) Generate Inventory Upload File\n5) Set Abbreviation By Set Name\n6) Quit\n\n")
+        menu_input = input("\nMTG Cloud Inventory Tool Main Menu\nPlease choose one of the following numbered options.\n1) Detailed Instructions\n2) Create Entry Form Instructions\n3) Update And Optimize Card Database\n4) Generate Inventory Upload File\n5) Concatenate Output Files\n6) Set Abbreviation By Set Name\n7) Quit\n\n")
 
         try:
-            if menu_input == "6":
+            if menu_input == "7":
                 return
 
             else:
