@@ -5,3 +5,4 @@ venv
 scryfall_default-cards.json
 __pycache__
 InventoryOutput
+EntryForms

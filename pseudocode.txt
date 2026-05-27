@@ -1,9 +1,5 @@
-Make Generate inventory output.csv write the file as the set_abbr.csv.
-1) Make the program look up the file and if it exists add to the file. 
-2) If the file doesn't exist create a new one.
-3) Write tests
-
-
-Create a set name to abbreviation list for the main menu.
-1) Create a dictionary of set names to their abbreviations.
-2) Print each value from the main menu.
+1) Create a method which takes a card parameter and then checks an inventory output and returns the number of times that card appears in that inventory.
+2) Use Python's filter method to filter out cards of that name in the inventory list.
+3) Use the count returned by the method to change the count value of the card in memory.
+4) Add that card back to the inventory list.
+5) Rewrite the inventory list.

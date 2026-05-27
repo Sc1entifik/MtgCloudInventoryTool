@@ -1,20 +1,18 @@
-import csv
 import json
 import requests
+from pathlib import Path
 
 class EntryForms():
-    set_and_foil_status_path = "EntryForms/set_and_foil_status.csv"
-    collector_numbers_path = "EntryForms/collector_numbers.csv"
-    set_and_foil_instructions = "Replace me with a set abbreviation, foil or non-foil, and inventory format like this.\nMMQ,non-foil,cardsphere   (As of now formats include cardsphere, and deckbox)"
-    collector_numbers_instructions = "Replace me with collector numbers from the bottom center of your cards separated by periods like this.\n95.75.16.78.116"
+    entry_forms_directory = "EntryForms"
+    entry_forms_instructions_path = "EntryForms/instructions.csv"
+    entry_forms_instructions = "Create a file for each set you are bulk importing with the name being the set_abb.csv (example: mmq.csv).\n\nThe first line of each file should have foil or non-foil, and the inventory format (As of now formats include cardsphere, and deckbox) example: non-foil,deckbox\n\nThe second line of each file should be the collector numbers of each card separated by a decimal point. example: 95.75.16.78.116\n\n Once you fill out a file for all sets you are bulk importing run the program and choose option 4 from the main menu. This will create a bulk output file for each entry form you filled out."
 
-    def reset_entry_forms(self):
-        with open(EntryForms.set_and_foil_status_path, "w") as set_and_foil:
-            set_and_foil.write(EntryForms.set_and_foil_instructions)
+    def create_entry_form_instructions(self):
+        with open(EntryForms.entry_forms_instructions_path, "w") as set_and_foil:
+            set_and_foil.write(EntryForms.entry_forms_instructions)
 
-        with open(EntryForms.collector_numbers_path, "w") as collector_numbers:
-            collector_numbers.write(EntryForms.collector_numbers_instructions)
-
+    def entry_form_file_path_objects(self):
+        return Path(EntryForms.entry_forms_directory)
 
 class ScryfallDatabase():
     scryfall_bulk_data_url = "https://api.scryfall.com/bulk-data"
@@ -55,4 +53,3 @@ class ScryfallDatabase():
         with open(ScryfallDatabase().json_destination, "w") as scryfall_db:
             scryfall_db.write(json.dumps(optimized_list))
             print(f"{ScryfallDatabase.json_destination} has been optimized for maximum performance!")
-
