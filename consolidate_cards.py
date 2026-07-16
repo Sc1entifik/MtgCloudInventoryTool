@@ -50,8 +50,7 @@ class ConsolidateCards():
             writer = csv.DictWriter(inventory_file, fieldnames=self.headers)
             writer.writeheader()
             writer.writerows(self.consolidated_dictionary)
+            
 
-
-
-test_inventory = ConsolidateCards("InventoryOutput/concatenation_output.csv")
-test_inventory.consolidate_inventory()
+consolidate_concatenation_output = ConsolidateCards("InventoryOutput/concatenation_output.csv")
+consolidate_concatenation_output.consolidate_inventory()

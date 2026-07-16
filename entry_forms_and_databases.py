@@ -24,7 +24,8 @@ class ScryfallDatabase():
 
 
     def get_download_link(self):
-        download_directory = requests.get(ScryfallDatabase.scryfall_bulk_data_url)
+        headers = {"User-Agent":"MTG Cloud Inventory Tool", "Accept": "*/*"}
+        download_directory = requests.get(ScryfallDatabase.scryfall_bulk_data_url, headers=headers)
         download_dict = download_directory.json()
 
         for archive in download_dict.get("data"):

@@ -75,6 +75,7 @@ class UserInterface:
                 return self.generate_main_menu()
 
         except (ValueError, TypeError):
+            self._download_and_optimize_database()
             print("\n\nPlease enter a valid number input from the main menu.\n\n")
             return self.generate_main_menu()
         
