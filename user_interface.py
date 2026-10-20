@@ -7,7 +7,7 @@ from find_set_abbreviation import find_set_abbreviation
 class UserInterface:
 
     def __init__(self):
-        self.expansion_names_tuple = self._create_expansion_names_tuple()
+        self.expansion_names_tuple = self._create_expansion_names_tuple() #If scryfall database creation ever fails comment out this line to keep user interface from erroring out.
         self.user_interface_menu = self._create_user_interface_menu()
 
     

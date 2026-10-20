@@ -1,4 +1,5 @@
 import json
+import gzip
 import requests
 from pathlib import Path
 
@@ -16,6 +17,7 @@ class EntryForms():
 
 class ScryfallDatabase():
     scryfall_bulk_data_url = "https://api.scryfall.com/bulk-data"
+    scryfall_bulk_data_headers = {"User-Agent":"MTG Cloud Inventory Tool", "Accept": "*/*"}
     json_destination = "scryfall_default-cards.json"
     
 
@@ -24,20 +26,20 @@ class ScryfallDatabase():
 
 
     def get_download_link(self):
-        headers = {"User-Agent":"MTG Cloud Inventory Tool", "Accept": "*/*"}
-        download_directory = requests.get(ScryfallDatabase.scryfall_bulk_data_url, headers=headers)
+        download_directory = requests.get(ScryfallDatabase.scryfall_bulk_data_url, headers=ScryfallDatabase.scryfall_bulk_data_headers)
         download_dict = download_directory.json()
 
         for archive in download_dict.get("data"):
             if archive.get("type") == "default_cards":
-                download_url = archive.get("download_uri")
+                download_url = archive.get("jsonl_download_uri")
                 download_directory.close()
                 return download_url
 
 
     def download_scryfall_database(self):
-        scryfall_json = requests.get(self.scryfall_download_link)
-
+        download_link = self.get_download_link()
+        scryfall_json = requests.get(download_link)
+        print("This is a large file this might take several minutes.")
         with open(ScryfallDatabase.json_destination, "wb") as destination_file:
             destination_file.write(scryfall_json.content)
             print(f"{ScryfallDatabase.json_destination} has been created!")
@@ -45,12 +47,13 @@ class ScryfallDatabase():
 
 
     def optimize_scryfall_database(self):
-
-        with open(ScryfallDatabase.json_destination) as scryfall_db:
-            scryfall_json = json.load(scryfall_db)
-            optimized_key_list = ["collector_number", "name", "set", "set_name"]
-            optimized_list = [{key : archive.get(key) for key in optimized_key_list} for archive in scryfall_json]
+        with open(ScryfallDatabase.json_destination, "rb") as compressed_scryfall_db:
+            with gzip.GzipFile(fileobj=compressed_scryfall_db, mode="rb") as scryfall_cards:
+                magic_cards = (json.loads(line) for line in scryfall_cards)
+                optimized_key_list = ["collector_number", "name", "set", "set_name"]
+                optimized_card_list = [{key: card.get(key) for key in optimized_key_list} for card in magic_cards]
+                
         
-        with open(ScryfallDatabase().json_destination, "w") as scryfall_db:
-            scryfall_db.write(json.dumps(optimized_list))
+        with open(ScryfallDatabase.json_destination, "w") as scryfall_db:
+            json.dump(optimized_card_list, scryfall_db)
             print(f"{ScryfallDatabase.json_destination} has been optimized for maximum performance!")
