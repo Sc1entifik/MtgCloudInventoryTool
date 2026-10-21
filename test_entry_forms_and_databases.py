@@ -22,21 +22,15 @@ def entry_forms():
 
 
 def test_reset_entry_forms(entry_forms):
-    entry_forms.reset_entry_forms()
+    entry_forms.create_entry_form_instructions()
     
-    with open(EntryForms.set_and_foil_status_path, 'r') as status_object:
+    with open(EntryForms.entry_forms_instructions_path, 'r') as status_object:
         status = csv.reader(status_object)
         #Lines need to be joined back togeither using the ",".join(next(status)) line because of the commas naturally occurring in the sentence and the file being a .csv with a comma delimiter
         status_instructions = ",".join(next(status))
-        new_line_index = EntryForms.set_and_foil_instructions.find('\n')
-        assert status_instructions == EntryForms.set_and_foil_instructions[:new_line_index]
+        new_line_index = EntryForms.entry_forms_instructions.find('\n')
+        assert status_instructions == EntryForms.entry_forms_instructions[:new_line_index]
 
-    with open(EntryForms.collector_numbers_path, 'r') as collector_number_object:
-        cn = csv.reader(collector_number_object)
-        cn_instructions = next(cn)[0]
-        new_line_index = EntryForms.collector_numbers_instructions.find('\n')
-        assert cn_instructions == EntryForms.collector_numbers_instructions[:new_line_index]
-        
 
 def test_get_download_link(scryfall_database):
     comparison_value = "https://data.scryfall.io/default-cards/"
